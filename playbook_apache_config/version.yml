@@ -1,0 +1,11 @@
+---
+- hosts:  localhost
+  become:  yes
+  tasks:
+  - name:  version de git
+    shell:
+      cmd:  "git --version"
+    register:  data
+  - name:  print all returned data
+    debug:
+      msg: "{{ data.stdout }}"

@@ -1,0 +1,28 @@
+---
+- hosts:  localhost
+  become:  yes
+  tasks:
+  - name:    Install apache
+    yum:
+      name:    httpd
+      state:    present
+  - name:    add web content
+    lineinfile:
+      line:  "here is some file"
+      path:    /var/www/html/dom.html
+  - name:  start httpd
+    service:
+      name:  httpd
+      state:  started
+  - name:  group ansible creation
+    group:
+      name:  ansible
+      state:  present
+      system:  yes
+  - name:  user ansible creation
+    user:
+      name:  ansible
+      state:  present
+      group:  ansible
+      system:  yes
+      passwd:  cangetin

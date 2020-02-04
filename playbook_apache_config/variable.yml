@@ -1,0 +1,11 @@
+---
+- hosts:  localhost
+  become:  yes
+  vars:
+    target_service:  httpd
+    target_state:  started
+  tasks:
+  - name:  Ensure target servie is at target state
+    service:
+      name:  "{{ target_service }}"
+      state:  "{{ target_state }}"

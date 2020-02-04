@@ -1,0 +1,21 @@
+---
+- hosts:  localhost
+  become:  yes
+  vars:
+    target_group:  ansible
+    target_user:  ansible
+  tasks:
+  - name:  group creation
+    group:
+      name:  "{{ target_group }}"
+      state:  present
+      system:  yes
+  - name:  user creation
+    user:
+      name:  "{{ target_user }}"
+      state:  present
+      group:  ansible
+      system:  yes
+  - name:  user passwd set to cangetin
+    shell:
+      cmd: echo "{{ target_user }}:cangetin" | chpasswd
