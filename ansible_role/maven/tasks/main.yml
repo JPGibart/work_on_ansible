@@ -1,0 +1,15 @@
+---
+# tasks file for maven
+- name: curl de maven
+  get_url:
+   url: https://www-us.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+   dest: /home/vagrant
+- name: untar maven
+  shell: tar -xzf /home/vagrant/apache-maven-3.6.3-bin.tar.gz -C /opt/
+- name: Config du fichier maven
+  lineinfile:
+   path: /etc/profile.d/mvn.sh
+   line: "{{ item }}"
+  with_items:
+   - "export MAVEN_HOME=/opt/apache-maven-3.6.3"
+   - "export PATH=$PATH:$MAVEN_HOME/bin"
