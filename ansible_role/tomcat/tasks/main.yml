@@ -12,10 +12,6 @@
   yum:
     name: tomcat-admin-webapps
     state: present
-- name: stop httpd service
-  systemd:
-    name: httpd
-    state: stopped
 - name: start tomcat service
   systemd:
     name: tomcat
