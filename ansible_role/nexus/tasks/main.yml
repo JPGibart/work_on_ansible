@@ -1,0 +1,16 @@
+---
+# tasks file for nexus
+- name: curl de nexus
+  get_url:
+   url: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+   dest: /home/vagrant
+- name: Extract nexus
+  unarchive:
+    src: /home/vagrant/nexus-3.20.1-01-unix.tar.gz
+    dest: /opt
+- name: stat nexus
+  stat: path=/opt/nexus
+  register: nexus_stat
+- name: Move nexus
+  command: mv /opt/nexus-3.20.1-01 /opt/nexus
+  when: not(nexus_stat.stat.exists)
