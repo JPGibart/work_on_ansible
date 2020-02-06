@@ -1,0 +1,24 @@
+---
+# tasks file for tomcat
+- name: install Tomcat
+  yum:
+    name: tomcat
+    state: present
+- name: install Tomcat dep 1
+  yum:
+    name: tomcat-webapps
+    state: present
+- name: install Tomcat dep 2
+  yum:
+    name: tomcat-admin-webapps
+    state: present
+- name: stop httpd service
+  systemd:
+    name: httpd
+    state: stopped
+- name: start tomcat service
+  systemd:
+    name: tomcat
+    state: started
+    enabled: yes
+
